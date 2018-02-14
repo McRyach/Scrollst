@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    </head>
+
+    <body>
+            <style>
+                    @font-face{
+                        font-family: 'YiBaiti';
+                        src: url('msyi.ttf') 
+                    }
+                    html, body {
+                        padding: 0;
+                        margin: 0;
+                    }
+        
+                    .header {
+                        margin: 0;
+                    }
+                    .infinite-carousel .list{
+                        
+                        height:auto;
+                        top: 0px;
+                        bottom: 0px;
+                        left: 0px;
+                        right: -17px;
+                        overflow-y: auto;
+                        position: absolute;
+                    }
+                    .infinite-carousel .viewport{
+                        width:100%;
+                        height: 100%;
+                        height:100vh;
+                        overflow: hidden;
+                        position: relative;
+                    }
+                    .item{
+                        font-family: 'YiBaiti', sans-serif;
+                        font-size: 40px;
+                        width:100%;
+                        height:200px;
+                        color: #ff003A;
+                        text-align: center;
+                        vertical-align: middle;
+                        line-height: 200px;
+                        float: left;
+                        margin-top: 250px;
+                        margin-bottom: 250px;
+                    }
+                    .r{
+                        background-image: url('images/01_Par.gif');
+                        height: 200px;
+                        background-attachment: fixed;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                    }
+                    .g{
+                        background-image: url('images/02_Par.gif');
+                        height: 200px;
+                        background-attachment: fixed;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                    }
+                    .b{
+                        background-image: url('images/03_Par.gif');
+                        height: 200px;
+                        background-attachment: fixed;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                    }
+        
+                </style>
+        <div class='infinite-carousel'>
+            <!-- <button class='pre'>pre</button> -->
+            <div class="viewport"> 
+                <div class='list'>
+                    <div class='item b'>
+                        ARIADNA'S CORNER
+                    </div>
+                    <div class='item r'>
+                        DESIGENCE
+                    </div>
+                    <div class='item g'>
+                        DYNAMIC MATERIAL CULTURE
+                    </div>
+                    <div class='item b'>
+                        MISOTRYPY
+                    </div>
+                    <div class='item r'>
+                        ISEGORIA
+                    </div>
+                    <div class='item g'>
+                        MESH FARM
+                    </div>
+                    <div class='item r'>
+                        7
+                    </div>
+                    <div class='item b'>
+                        8
+                    </div>
+                    <div class='item g'>
+                        9
+                    </div>
+                    <div class='item b'>
+                        10
+                    </div>
+                    <div class='item r'>
+                        11
+                    </div>
+                    <div class='item b'>
+                        12
+                    </div>
+                </div>
+            </div>
+            <!-- <button class='next'>next</button> -->
+        </div>
+        <script> 
+
+            (function () {
+                // logic here
+                var item;
+
+                $(".item").click(function(event){
+                        event.stopPropagation();
+
+                        if(typeof item != 'undefined'){
+                            item.css("height", "200px");
+                            item = $(this);
+                        }else{
+                            item = $(this);
+                        }
+                        
+                        var text = $(this).text();
+                        console.log(text); 
+                        //$(this).css("height", "400px");
+                        $(this).css({"height": "400px"})
+                });
+
+             
+                $(".list").scroll(function(){
+                    var list = $(".list").scrollTop();
+                    console.log("Pixels :" + list);
+
+                   if(list > 4199){
+                       console.log("Create Below");
+                       var list = $(".list");
+                       list.children(":last").after(list.children(":first"));
+                   }
+
+                   if(list < 2801){
+                       console.log("Create Above");
+                       var list = $(".list");
+                       list.prepend(list.children(":last"));
+                   }
+
+                   $(window).click(function(){
+                      console.log("That's Window Click!" + item);
+                      if(typeof item != 'undefined'){
+                        item.css("height", "200px");            
+                      }
+                               
+                   });
+                });
+                
+            })();
+
+            $(document).ready(function(){
+                console.log("We are Here");
+                $(".list").animate({
+                    scrollTop: '3500px'
+                },4000);
+            });
+
+            //$(".item").click(function(){
+            //    var text = $(this).text();
+            //   console.log(text); 
+            //   $(this).css("height", "400px");
+            //});
+
+
+
+        </script>
+    </body>
+</html>
